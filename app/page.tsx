@@ -12,12 +12,24 @@ export default function Home() {
   const stage = BMAD_STAGES[stageIndex];
 
   async function runStage() {
-    const res = await fetch("/api/bmad", {
-      method: "POST",
-      body: JSON.stringify({ input, stage }),
-    });
-    const data = await res.json();
-    setOutput(data.result);
+    try {
+      const res = await fetch("/api/bmad", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ input, stage }),
+      });
+      
+      if (!res.ok) {
+        throw new Error("API request failed");
+      }
+      
+      const data = await res.json();
+      setOutput(data.result || "No response");
+    } catch (error) {
+      setOutput(`Error: ${error instanceof Error ? error.message : "Unknown error"}`);
+    }
   }
 
   function nextStage() {
