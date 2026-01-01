@@ -1,16 +1,18 @@
+export const dynamic = "force-dynamic";
+
 "use client";
 
 import { useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
 
 export default function Login() {
   const [email, setEmail] = useState("");
 
   async function signIn() {
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-    });
-
+    const supabase = getSupabase();
+  
+    const { error } = await supabase.auth.signInWithOtp({ email });
+  
     if (error) {
       alert(error.message);
     } else {
