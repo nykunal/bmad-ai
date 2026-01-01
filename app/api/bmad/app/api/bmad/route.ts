@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { runBMAD } from "@/lib/bmad";
 
 export async function POST(req: Request) {
