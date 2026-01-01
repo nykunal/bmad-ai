@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "NEXT_DISABLE_TURBOPACK=1 NEXT_TELEMETRY_DISABLED=1 CI=true next build",
-    "start": "next start",
-    "lint": "eslint"
-  },
+  "dev": "next dev",
+  "build": "cross-env NEXT_DISABLE_TURBOPACK=1 NEXT_TELEMETRY_DISABLED=1 CI=true next build",
+  "start": "next start"
+}
+,
   "dependencies": {
     "@supabase/supabase-js": "^2.43.4",
+    "cross-env": "^10.1.0",
     "next": "^14.2.35",
     "openai": "^4.0.0",
     "react": "18.2.0",

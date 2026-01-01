@@ -1,7 +1,9 @@
 import { supabase } from "./supabase";
 
 export async function saveMemory(text: string) {
-  await supabase.from("memory").insert({ content: text });
+  await supabase.from("memory").insert({
+    content: text,
+  });
 }
 
 export async function readMemory() {
