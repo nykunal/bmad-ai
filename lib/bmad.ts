@@ -1,26 +1,18 @@
-import { callLLM } from "@/lib/lib/llm";
-import { saveMemory, readMemory } from "./memory";
-
 export async function runBMAD(input: string, stage: string) {
-  const past = await readMemory();
+  // Import ONLY at runtime
+  const { callLLM } = await import("./lib/llm");
 
   const prompt = `
-You are using the BMAD method.
+You are applying the BMAD method.
 
-Past context:
-${past}
-
-Current stage:
+Stage:
 ${stage}
 
 User input:
 ${input}
 
-Respond clearly for this stage.
+Respond clearly and concisely.
 `;
 
-  const result = await callLLM(prompt);
-  await saveMemory(result || "");
-
-  return result;
+  return await callLLM(prompt);
 }

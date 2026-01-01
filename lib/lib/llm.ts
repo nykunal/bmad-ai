@@ -1,9 +1,9 @@
-import OpenAI from "openai";
-
 export async function callLLM(prompt: string) {
   if (!process.env.OPENAI_API_KEY) {
-    throw new Error("OPENAI_API_KEY is missing at runtime");
+    throw new Error("OPENAI_API_KEY missing at runtime");
   }
+
+  const OpenAI = (await import("openai")).default;
 
   const client = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
