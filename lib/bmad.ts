@@ -1,7 +1,7 @@
 import { readMemory, saveMemory } from "./memory";
 
 export async function runBMAD(input: string, stage: string) {
-  const { callLLM } = await import("./lib/llm");
+  const { callLLM } = await import("@/lib/lib/llm");
 
   const past = await readMemory();
 

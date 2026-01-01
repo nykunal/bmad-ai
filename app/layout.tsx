@@ -1,2 +1,23 @@
+import type { Metadata } from "next";
+import "./globals.css";
 
-import type { Metadata } from "next";import "./globals.css";export const metadata: Metadata = {  title: "BMAD AI",  description: "BMAD Method Application",};export default function RootLayout({  children,}: {  children: React.ReactNode;}) {  return (    <html lang="en">      <body>        <div className="flex min-h-screen">          {children}        </div>      </body>    </html>  );}  
+export const metadata: Metadata = {
+  title: "BMAD AI",
+  description: "BMAD Method Application",
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body>
+        <div className="flex min-h-screen">
+          {children}
+        </div>
+      </body>
+    </html>
+  );
+}
