@@ -1,6 +1,3 @@
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
-
 "use client";
 
 import { useState } from "react";
@@ -11,9 +8,9 @@ export default function Login() {
 
   async function signIn() {
     const supabase = getSupabase();
-  
+
     const { error } = await supabase.auth.signInWithOtp({ email });
-  
+
     if (error) {
       alert(error.message);
     } else {
