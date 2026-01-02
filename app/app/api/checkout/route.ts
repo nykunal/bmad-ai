@@ -1,27 +1,27 @@
-import Stripe from "stripe";
+import { NextResponse } from "next/server";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2023-10-16",
-});
+export const runtime = "nodejs";
 
-export async function POST() {
-  const session = await stripe.checkout.sessions.create({
-    mode: "subscription",
-    line_items: [
-      {
-        price_data: {
-          currency: "usd",
-          product_data: { name: "BMAD AI Pro" },
-          unit_amount: 2900,
-          recurring: { interval: "month" },
-        },
-        quantity: 1,
-      },
-    ],
-    success_url: "http://localhost:3000",
-    cancel_url: "http://localhost:3000",
-  });
+export async function POST(req: Request) {
+  try {
+    const body = await req.json();
 
-  return Response.json({ url: session.url });
+    console.log("API HIT:", body);
+
+    if (!body || !body.input) {
+      return NextResponse.json(
+        { error: "Input missing" },
+        { status: 400 }
+      );
+    }
+
+    return NextResponse.json({
+      output: `BMAD processed this input:\n\n${body.input}`,
+    });
+  } catch (err: any) {
+    return NextResponse.json(
+      { error: err?.message || "Server error" },
+      { status: 500 }
+    );
+  }
 }
-
